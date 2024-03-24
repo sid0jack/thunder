@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Ensure Cargo is in the PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -28,5 +28,9 @@ sudo ip addr add 192.168.1.0/24 dev thunder0
 # Bring the interface up
 sudo ip link set dev thunder0 up
 
+# Ensure the interface is in the correct mode
+trap "kill $pid" INT TERM
+
 # Wait for the background process to finish
 wait $pid
+
